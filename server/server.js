@@ -1,6 +1,7 @@
 const express = require('express');
 require('dotenv').config();
 const productRoutes = require('./routes/products.js');
+const connectDB = require('./config/db.js');
 
 // epxress app
 const app = express();
@@ -15,8 +16,21 @@ app.use((req, res, next) => {
 // routes
 app.use('/api/products', productRoutes);
 
-// listen for requests
-const port = process.env.PORT;
-app.listen(port, () => {
-    console.log(`Listening for request on port: ${port}`);
-});
+
+// connect to db then listen for request
+const startServer = async () => {
+    try {
+        await connectDB();
+
+        // listen for requests
+        const port = process.env.PORT || 4000;
+        app.listen(port, () => {
+            console.log(`Listening for request on port: ${port}`);
+        });
+    } catch (err) {
+        console.log(`Startup failed: ${err.message}`);
+        process.exit(1);
+    }
+}
+
+startServer();
