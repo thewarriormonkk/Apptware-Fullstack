@@ -27,10 +27,9 @@ app.use('/api/', limiter);
 // body parsing middleware
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
-app.use(mongoSanitize());
 
 
-// loggin middleware
+// logging middleware
 app.use(morgan('dev'));
 
 // api routes
