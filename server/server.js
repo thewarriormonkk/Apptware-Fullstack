@@ -3,7 +3,6 @@ require('dotenv').config();
 const morgan = require('morgan');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-const mongoSanitize = require('express-mongo-sanitize');
 const productRoutes = require('./routes/products.js');
 const connectDB = require('./config/db.js');
 
