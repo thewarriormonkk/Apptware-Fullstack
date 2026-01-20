@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useProductsContext } from '../hooks/useProductsContext';
 
 const AddProduct = () => {
     const [productName, setProductName] = useState('');
@@ -7,6 +8,8 @@ const AddProduct = () => {
     const [color, setColor] = useState('');
     const [dimension, setDimension] = useState('');
     const [countryOfOrigin, setCountryOfOrigin] = useState('');
+
+    const { dispatch } = useProductsContext();
 
     const navigate = useNavigate();
 
@@ -31,7 +34,8 @@ const AddProduct = () => {
             setColor('');
             setDimension('');
             setCountryOfOrigin('');
-            console.log('New Product Added:', data);
+            
+            dispatch({ type: 'CREATE_PRODUCT', payload: data })
             navigate('/catalog');
 
         }

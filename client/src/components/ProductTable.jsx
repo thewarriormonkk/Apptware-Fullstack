@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import ProductDetails from './ProductDetails';
+import { useProductsContext } from '../hooks/useProductsContext';
 
 const ProductTable = () => {
-    const [products, setProducts] = useState(null);
+    const { products, dispatch } = useProductsContext();
 
     const API_URL = import.meta.env.VITE_API_URL;
 
@@ -11,12 +12,11 @@ const ProductTable = () => {
             const response = await fetch(API_URL);
             const data = await response.json();
             if (response.ok) {
-                setProducts(data);
-                console.log(data);
+                dispatch({ type: 'SET_PRODUCTS', payload: data });
             }
         }
         fetchProducts();
-    }, []);
+    }, [dispatch]);
 
     return (
         <div className="product-table">

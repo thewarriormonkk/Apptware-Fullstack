@@ -1,4 +1,12 @@
 const ProductDetails = ({ product }) => {
+    const handleDelete = () => {
+
+    }
+
+    const handleEdit = () => {
+        
+    }
+    
     return (
             <tbody>
                 <tr >
@@ -8,8 +16,8 @@ const ProductDetails = ({ product }) => {
                     <td>{product.price}</td>
                     <td>{product.countryOfOrigin}</td>
                     <td>
-                        <button>X</button>
-                        <button>Edit</button>
+                        <button onClick={handleDelete}>X</button>
+                        <button onClick={handleEdit}>Edit</button>
                     </td>
                 </tr>
             </tbody>
