@@ -33,16 +33,21 @@ const getProduct = async (req, res) => {
 // @route POST /api/products
 // @access Public
 const createProduct = async (req, res) => {
-    const { productName, price, dimension, color, countryOfOrigin } = req.body;
-    const newProduct = {
-        productName,
-        price,
-        dimension,
-        color,
-        countryOfOrigin
+    try {
+        const { productName, price, dimension, color, countryOfOrigin } = req.body;
+        const newProduct = {
+            productName,
+            price,
+            dimension,
+            color,
+            countryOfOrigin
+        }
+        const product = await Product.create(newProduct);
+        res.status(201).json(product);
+    } catch (error) {
+        // pass raw error to the global handler
+        next(error);
     }
-    const product = await Product.create(newProduct);
-    res.status(201).json(product);
 }
 
 // @desc Update a product detail

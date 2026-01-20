@@ -53,7 +53,19 @@ app.use((err, req, res, next) => {
     console.error('Error:', err.message);
     const isProd = process.env.NODE_ENV === 'production';
 
-    res.status(err.statusCode).json({
+    if (err.name === 'ValidationError') {
+        // extract field names
+        const emptyFields = Object.keys(err.errors);
+
+        err.statusCode = 400;
+        err.message = 'Please fill in all required fields';
+        err.isOperational = true;
+        err.emptyFields = emptyFields;
+    }
+
+    const statusCode = err.statusCode || 500;
+
+    res.status(statusCode).json({
         status: 'error',
         message: isProd ? 'Something went wrong' : err.message,
         stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
