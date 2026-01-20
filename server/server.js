@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const productRoutes = require('./routes/products.js');
 const connectDB = require('./config/db.js');
+const cors = require('cors');
 
 // express app
 const app = express();
@@ -22,6 +23,10 @@ const limiter = rateLimit({
 });
 
 app.use('/api/', limiter);
+
+
+// cors configuration
+app.use(cors());
 
 // body parsing middleware
 app.use(express.json({ limit: '10kb' }));

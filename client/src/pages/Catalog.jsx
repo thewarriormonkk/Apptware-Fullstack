@@ -1,7 +1,10 @@
+import ProductTable from "../components/ProductTable";
+
 const Catalog = () => {
     return (
         <div className="catalog">
-            <h2>Catelog</h2>
+            <h2>Catalog</h2>
+            <ProductTable />
         </div>
     );
 }
