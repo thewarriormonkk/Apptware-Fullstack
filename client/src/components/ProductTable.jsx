@@ -20,9 +20,21 @@ const ProductTable = () => {
 
     return (
         <div className="product-table">
-            {products && products.map((product) => (
-                <ProductDetails key={product._id} product={product} />
-            ))}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Color</th>
+                        <th>Dimension</th>
+                        <th>Price</th>
+                        <th>Country</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                    {products && products.map((product) => (
+                        <ProductDetails key={product._id} product={product} />
+                    ))}
+            </table>
         </div>
     );
 }
