@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { WorkoutsContext } from '../context/ProductsContext';
+import { ProductsContext } from '../context/ProductsContext';
 
 export const useProductsContext = () => {
-    const context = useContext(WorkoutsContext);
+    const context = useContext(ProductsContext);
 
     if (!context) {
         throw Error('useProductsContext must be used inside an ProductsContextProvider');

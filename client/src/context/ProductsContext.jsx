@@ -1,6 +1,6 @@
 import { createContext, useReducer } from 'react';
 
-export const WorkoutsContext = createContext();
+export const ProductsContext = createContext();
 
 export const productsReducer = (state, action ) => {
     switch(action.type) {
@@ -12,19 +12,29 @@ export const productsReducer = (state, action ) => {
             return {
                 products: [action.payload, ...state.products]
             }
+        case 'UPDATE_PRODUCT':
+            return {
+                products: state.products.map(product => { 
+                    return product._id === action.payload._id ? action.payload : product 
+                })
+            }
+        case 'DELETE_PRODUCT':
+            return {
+                products: state.products.filter( product => product._id !== action.payload )
+            }
         default:
             return state
     }
 }
 
-export const WorkoutsContextProvider = ({ children }) => {
+export const ProductsContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(productsReducer, {
-        products: null
+        products: []
     });
 
     return (
-        <WorkoutsContext.Provider value={{...state, dispatch }}>
+        <ProductsContext.Provider value={{...state, dispatch }}>
             { children }
-        </WorkoutsContext.Provider>
+        </ProductsContext.Provider>
     );
 }
